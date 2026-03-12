@@ -1,0 +1,34 @@
+# calcular_descuento.py — función a probar
+def calcular_descuento(precio):
+    if precio <= 0:
+        raise ValueError("El precio debe ser mayor que cero.")
+    if precio <= 100:
+        return precio * 0.95   # 5% descuento
+    elif precio <= 500:
+        return precio * 0.90   # 10% descuento
+    else:
+        return precio * 0.85   # 15% descuento
+
+
+
+
+# test_calcular_descuento.py — casos de prueba con pytest
+import pytest
+from calcular_descuento import calcular_descuento
+
+# T1: precio negativo → ValueError (PE1*)
+def test_precio_negativo():
+    with pytest.raises(ValueError):
+        calcular_descuento(-10)
+
+# T2: precio en (0, 100] → descuento 5% (PE2)
+def test_descuento_5_por_ciento():
+    assert calcular_descuento(90) == 85.5
+
+# T3: precio en (100, 500] → descuento 10% (PE3)
+def test_descuento_10_por_ciento():
+    assert calcular_descuento(450) == 405.0
+
+# T4: precio en (500, max] → descuento 15% (PE4)
+def test_descuento_15_por_ciento():
+    assert calcular_descuento(1000) == 850.0
